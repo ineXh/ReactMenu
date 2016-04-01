@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <script src="js/lib/socket.io-1.3.5.js"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery-ui.js"></script>
+    <script src="js/lib/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+
+    <link rel='stylesheet' type='text/css' href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type='text/css' href="css/font-awesome.min.css"/>
+
+
+    <link rel='stylesheet' type='text/css' href="css/styles.css" />
+    <link rel='stylesheet' type='text/css' href="css/message_styles.css" />
+    <link type='text/css' href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+
+    <script src="js/lib/react.js"></script>
+    <script src="js/lib/react-dom.js"></script>
+    <script src="js/lib/browser.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="js/lib/marked.min.js"></script>
+
+    <script type="text/javascript">
+    function a(){if(document.all){return false;}}function b(e){if(document.layers||(document.getElementById&!document.all)){if(e.which==2||e.which==3){return false;}}}if(document.layers){document.captureEvents(Event.MOUSEDOWN);document.onmousedown=b;}else{document.onmouseup=b;document.oncontextmenu=a;}document.oncontextmenu=new Function("return false")
+    </script>
+
+    <title>Cow Frenzy</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #000;
+            /*#E0FFFF;*/
+		}
+	</style>
+
+</head>
+<body onkeydown="keyEvent(event)" onkeyup="metaKeyUp(event)">
+
+    <!--<div id="chatmonitor" class="monitor col-md-6"></div>
+    <input className="non-draggable" type="text" placeholder="Your name" ref="author" />
+
+    <input type="number" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number">-->
+    <div id="content"></div>
+    <div id="content2"></div>
+    <div id="message_content"></div>
+    <div id="story_message"></div>
+    <div id="gameinstruction_container"></div>
+    <!--<div id="gameinstruction">
+        <h2>Hey get the monster NOWWW</h2>
+    </div>-->
+    <!--<div id="fb-login"></div>-->
+    <!--<div class="draggable">
+    </div>-->
+    <div id="fb-login" style='display: none'>
+        <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();"></div>
+    </div>
+
+    <!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>-->
+<!--
+
+    <div id="dashboardBody" class="tabBody">
+        <ul class="tabBodyOptions">
+            <li>
+                <h2> Game 1 <span> 1/4 Players</span></h2>
+            </li>
+            <li>
+                <h2> Game 2 <span> 1/4 Players</span></h2>
+            </li>
+        </ul>
+    </div>-->
+
+    <!--
+      </div>
+
+    <input id="name" type="text" name="firstname">
+-->
+<!--<script src="js/cocoon.js"></script>
+    <script src="js/sound.js"></script>
+
+    <script src="js/GameItemPool.js"></script>
+    <script src="js/GameItems.js"></script>
+    <script src="assets/s1.js"></script>
+    <script src="js/Stage_Layout.js"></script>
+    <script src="js/Stagesetup.js"></script>
+
+
+    -->
+
+    <script type="text/babel" src="js/Component/Login.jsx"></script>
+    <script type="text/babel" src="js/Component/ChatMonitor.jsx"></script>
+    <script type="text/babel" src="js/Component/Gamelist.jsx"></script>
+    <script type="text/babel" src="js/Component/Playerlist.jsx"></script>
+    <script type="text/babel" src="js/Component/Clientlist.jsx"></script>
+    <script type="text/babel" src="js/Component/GameMessage.jsx"></script>
+    <script type="text/babel" src="js/Component/GameDialogue.jsx"></script>
+    <script type="text/babel" src="js/Component/GameStoryDialogue.jsx"></script>
+    <script type="text/babel" src="js/Component/GameInstruction.jsx"></script>
+    <script type="text/babel" src="js/Component/GameMenu.jsx"></script>
+    <script type="text/babel" src="js/Component/Interfaces.jsx"></script>
+
+    <script src="js/lib/pixi.js"></script>
+    <script src="js/lib/pvector.js"></script>
+	<script src="js/QuadTree.js"></script>
+    <script src="js/QuadTree2.js"></script>
+    <script src="js/Utils.js"></script>
+    <script src="js/Constants.js"></script>
+    <script src="js/Globals.js"></script>
+
+    <script src="js/facebook_main.js"></script>
+
+    <script src="js/Camera.js"></script>
+    <script src="js/Keyboard.js"></script>
+
+    <script src="js/helper.js"></script>
+	<script src="js/Path.js"></script>
+
+    <script src="assets/stage/s1.js"></script>
+    <script src="assets/stage/s2.js"></script>
+    <script src="assets/stage/st1.js"></script>
+    <script src="assets/stage/st2.js"></script>
+    <script src="assets/stage/st3.js"></script>
+    <script src="js/Stage/Stage_Layout.js"></script>
+    <script src="js/Stage/Stagesetup.js"></script>
+    <script src="js/Stage/StageButton.js"></script>
+    <script src="js/Stage/Storysetup.js"></script>
+    <script src="js/Stage/Storystagepool.js"></script>
+    <script src="js/Stage/Storystagesetup.js"></script>
+
+    <script src="js/Particle/ParticlesPool.js"></script>
+    <script src="js/Particle/Particle.js"></script>
+    <script src="js/Particle/Fireball.js"></script>
+    <script src="js/Particle/Arrow.js"></script>
+    <script src="js/Particle/Effects.js"></script>
+    <script src="js/Menu/MultiPlayerMenu.js"></script>
+    <script src="js/Menu/StoryMenu.js"></script>
+    <script src="js/Menu/MainMenu.js"></script>
+    <script src="js/Menu/Menu.js"></script>
+    <script src="js/Ball.js"></script>
+    <script src="js/Game_Msg.js"></script>
+    <script src="js/Character/SearchCircle.js"></script>
+    <script src="js/Character/SearchBound.js"></script>
+    <script src="js/Character/CharacterPool.js"></script>
+    <script src="js/Character/Character.js"></script>
+    <script src="js/Character/Cow.js"></script>
+    <script src="js/Character/CowMage.js"></script>
+    <script src="js/Character/Slime.js"></script>
+    <script src="js/Character/Hut.js"></script>
+    <script src="js/Character/Tower.js"></script>
+    <script src="js/Character/HealthBar.js"></script>
+
+    <script src="js/Communications.js"></script>
+    <script src="js/GameObjects.js"></script>
+    <script src="js/MiniMap.js"></script>
+    <script src="js/GameUI.js"></script>
+    <script src="js/Computer.js"></script>
+
+    <script src="js/Game.js"></script>
+	<script src="js/Main.js"></script>
+
+	</body>
+</html>
