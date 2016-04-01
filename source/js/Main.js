@@ -1,5 +1,6 @@
 var ground;
 var backbutton_count = 0;
+var updatequeue;
 var Engine = (function(global) {
     document.addEventListener('DOMContentLoaded', function() {
 
@@ -28,6 +29,7 @@ var Engine = (function(global) {
         stage0.addChild(stage);
 
         gravity = new PVector(0, height*1.5/10000);
+        gameobjects = new GameObjects();
 
 
         animate();
