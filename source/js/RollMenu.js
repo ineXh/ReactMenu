@@ -17,7 +17,7 @@ RollMenu.prototype = {
 
         this.rolls = [];
         for(var i = 0; i < 5; i++){
-            this.rolls.push(new Roll(this, i, this.sprite.r*3, PI*1.125 + i*0.75*PI/4));
+            this.rolls.push(new Roll(this, icon_texture, i, this.sprite.r*3, PI*1.125 + i*0.75*PI/4));
         }
         this.sprite.mousedown = this.touchstart.bind(this);
         this.sprite.touchstart = this.touchstart.bind(this);
@@ -52,11 +52,11 @@ RollMenu.prototype = {
         return this.Dead;
     },
 } // end RollMenu
-function Roll(menu, index, R, angle){
-    this.create(menu, index, R, angle);
+function Roll(menu, texture, index, R, angle){
+    this.create(menu, texture, index, R, angle);
 }
 Roll.prototype = {
-    create: function(menu, index, R, angle){
+    create: function(menu, texture, index, R, angle){
         this.menu = menu;
         this.angle = angle;
         this.index = index;
@@ -66,14 +66,18 @@ Roll.prototype = {
         this.r1 = R;
         this.r = this.r0;
 
-        this.sprite = new PIXI.Sprite(icon_texture);
+        this.sprite = new PIXI.Sprite(texture);
         this.sprite.anchor.x = 0.5;
         this.sprite.anchor.y = 0.5;
         this.sprite.x = 0;
         this.sprite.y = 0;
 
-        this.sprite.r = width/16;
-        this.sprite.scale.set( this.sprite.r*2 / this.sprite.width);
+        this.sprite.r0 = 0;
+        this.sprite.r1 = width/16;
+        this.sprite.r_base = this.sprite.width/2;
+        this.sprite.r = this.sprite.r0;
+        this.sprite.scale.set( this.sprite.r / this.sprite.r_base);
+
         menu.container.addChild(this.sprite)
         this.sprite.interactive = false;
         this.sprite.mousedown = this.touchstart.bind(this);
@@ -90,15 +94,21 @@ Roll.prototype = {
         updatequeue.remove(this);
     },
     update: function(){
+        this.count++;
+        if(this.count < this.index*4) return;
         if(this.expand){
             this.r += (this.r1 - this.r) / 10;
+            this.sprite.r += (this.sprite.r1 - this.sprite.r) / 10;
             this.sprite.x = this.r*Math.cos(this.angle)
             this.sprite.y = this.r*Math.sin(this.angle)
+            this.sprite.scale.set( this.sprite.r / this.sprite.r_base);
             if(Math.abs(this.r - this.r1) < 1) this.end();
         }else{
             this.r += (this.r0 - this.r) / 10;
+            this.sprite.r += (this.sprite.r0 - this.sprite.r) / 10;
             this.sprite.x = this.r*Math.cos(this.angle)
             this.sprite.y = this.r*Math.sin(this.angle)
+            this.sprite.scale.set( this.sprite.r / this.sprite.r_base);
             if(Math.abs(this.r - this.r0) < 1) this.end();
         }
     },
