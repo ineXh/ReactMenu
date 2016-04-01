@@ -15,4 +15,4 @@ window.myMainMenu = React.createFactory(MainMenu);
 window.render_myMainMenu = function() {
   ReactDOM.render(myMainMenu({ foo: 'bar' }), document.getElementById('content'));
 }
-render_myMainMenu();
+//render_myMainMenu();
